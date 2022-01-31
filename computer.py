@@ -1,25 +1,49 @@
+"""! 
+	@file     computer.py
+    @brief    Script to run the user interaction and communication interface
+    @author   Nick De Simone, Jacob-Bograd, Horacio Albarran
+    @date     January 30, 2022
+"""
+
 import serial
 import numpy as np
 
+class UInterface:
+	'''
+    @brief It defines a class for the User Interface interaction
+    
+    '''
+	
+	def __init__(self):
+		'''
+        @brief It creates an object for the User Interaction
+        '''
+		
+		
+	def main(self):
+		'''
+        @brief 
+        '''
+		self.data = []
+		
+		# it initialized the serial port as well as defining it
+		with serial.Serial('COM5', 115200) as self.s_port:
+			self.s_port.write(b"main()") # send the main command
+			print("WAITING")
+			self.s_port.write(b"1024")  # send the test value over
+			while True:
+				self.temp = self.s_port.readline()
+				print(self.temp)
+				if self.temp == b"DONE":
+					break #we are done
 
-def main():
-    data = []
-    with serial.Serial('COM5', 115200) as s_port:
-        s_port.write(b"main()") # send the main command
-        print("WAITING")
-        s_port.write(b"1024")  # send the test value over
-        while True:
-            temp = s_port.readline()
-            print(temp)
-            if temp == b"DONE":
-                break #we are done
-
-    print("just finished the with")
-            #if temp != "DONE":
-            #    data.append(temp)
-            #else:
-            #    break
+		print("just finished the with")
+				#if temp != "DONE":
+				#    data.append(temp)
+				#else:
+				#    break
 
 
 if __name__ == '__main__':
-    main()
+    Trial_Run = UInterface()
+	Trial_Run.main()

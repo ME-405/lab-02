@@ -1,3 +1,13 @@
+"""! 
+	@file     boot.py
+    @brief    
+    @author   Nick De Simone, Jacob-Bograd, Horacio Albarran
+    @date     January 30, 2022
+"""
+
+## ------------------------------------------------------->   IS THIS THE SAME AS THE MAIN FILE???   <--------------------------------------------------------------------
+
+# Importing libraries and classes
 from Motor import MotorDriver
 from encoder import Encoder
 from closedLoopControl import closedLoopController as closed_loop

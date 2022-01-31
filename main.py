@@ -1,12 +1,12 @@
-''' @file                       main.py
-    @brief                      File that runs the encoder and motor
-    @author                     Nick De Simone, Jacob-Bograd, Horacio Albarran
-    @date                       January 22, 2022
+'''! 
+	@file     main.py
+    @brief    File that runs the encoder and motor
+    @author   Nick De Simone, Jacob-Bograd, Horacio Albarran
+    @date     January 30, 2022
 '''
 
-# Importing libraries and classes,
+# Importing libraries and classes
 import utime
-
 from Motor import MotorDriver
 from encoder import Encoder
 from closedLoopControl import closedLoopController as closed_loop

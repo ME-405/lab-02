@@ -1,4 +1,11 @@
-# import the required classes
+"""! 
+	@file     closedLoopControl.py
+    @brief    Close loop control runs and manages data interaction produced by the hardware
+    @author   Nick De Simone, Jacob-Bograd, Horacio Albarran
+    @date     January 30, 2022
+"""
+
+# Importing the required classes and libraries
 from Motor import MotorDriver
 from encoder import Encoder
 from pyb import Pin
@@ -9,13 +16,18 @@ import utime
 
 
 class closedLoopController:
-
     def __init__(self, input_interval, encoder, motor
                  # encoder_pin1, encoder_pin2, encoder_timer,
                  # motor_enable, motor_pin1, motor_pin2, motor_timer
                  ):
-        '''
-
+        '''!
+		@brief   closedLoopController manages the data provided by the encoder as well as running calculations
+        @details This files manages the data provided by the encoder, it also manages the
+					 setting values for the proper functioning of the motor, and any other
+					 required calculations for the motor to work properly
+        @param   input_interval provides with the desired interval to collect data
+		@param   encoder set the parameter given for the chosen encoder
+		@param   motor provides with the chosen motor
         '''
 
         # set the setpoint and gain both to 0
@@ -46,6 +58,12 @@ class closedLoopController:
         self.encoder_list = []
 
     def control_algorithm(self):
+		'''!
+        @details It manages the value for kp as well as setting different
+					parameters for the duty cycle of the motor based on the 
+					actuation value; which is dependent of the difference 
+					encoder positions as well as the value of kp
+		'''
         # self.update_setpoint()  # prompt the user for an updated setpoint
         # self.update_kp()  # prompt the user for a new kp
         # print("setting values")
@@ -89,24 +107,49 @@ class closedLoopController:
         self.print_list()  # print out the list when we are done
 
     def update_setpoint(self):
+		'''!
+        @details It sets the desired position of the encoder in ticks 
+					as defined by the input of the user
+		'''
         self.final_point = int(input("Please enter the setpoint"))
 
     def update_interval(self):
+		'''!
+        @details It defines the interval at which data from the encoder 
+					will be collected as defined by the input of the user
+		'''
         self.interval = int(input("Please enter the interval"))
 
     def update_list(self):
+		'''!
+        @details It updates the encoder position and the current time-stamp while
+					also appending such values to the corresponding array
+		'''
+		
+		# Updating encoder's position on ticks
         self.encoder.update()
         encoder_value = self.encoder.current_pos
+		
+		# Updating the time-stamp 
         timestamp = utime.ticks_diff(utime.ticks_ms(), self.start_time)
+		
+		# Appending values to the corresponding array
         self.time_list.append(timestamp)
         self.encoder_list.append(encoder_value)
 
     # print("DEBUG: ", timestamp, encoder_value)
 
     def update_kp(self):
+		'''!
+        @details It ask for the user's input for the variable kp 
+		'''
         self.kp = float(input("Please enter kp"))
 
     def print_list(self):
+		'''!
+        @details It provides with the numerical values for the encoder positions as 
+					well as the corresponding time-stamp to such encoder position
+		'''
         data = zip(self.time_list, self.encoder_list)
         for numbers in data:
             print(*numbers)
@@ -123,19 +166,22 @@ class closedLoopController:
     #    print(self.time_list[index], " , ", self.encoder_list[index])
 
 
-def input_kp(self):
-    while self.uart.any == 0:
-        utime.sleep_us(50)
-    self.kp = self.uart.read()
-    self.kp = self.kp.decode()
+	def input_kp(self):
+		'''!
+			@details This functions is used for the computer interface interaction 
+		'''
+		while self.uart.any == 0:
+			utime.sleep_us(50)
+		self.kp = self.uart.read()
+		self.kp = self.kp.decode()
 
-#   check = self.uart.any()
-#   while check != 0:
-#       check = self.uart.any()
-#     utime.sleep_us(20)
+	#   check = self.uart.any()
+	#   if check != 0:
+	#       check = self.uart.any()
+	#       utime.sleep_us(20)
 
-#  raw_value = self.uart.readline()
-#  modified_value = raw_value  # offset for ascii values
-#   self.kp = modified_value
+	#  raw_value = self.uart.readline()
+	#  modified_value = raw_value  # offset for ascii values
+	#   self.kp = modified_value
 
-#
+	#
