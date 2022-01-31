@@ -29,15 +29,15 @@ class MotorDriver:
         self.ch1 = self.timer.channel(channel1, pyb.Timer.PWM, pin=self.Pin1)
         self.ch2 = self.timer.channel(channel2, pyb.Timer.PWM, pin=self.Pin2)
         self.pinB2 = pyb.Pin(pyb.Pin.cpu.B2)
-        print("DEBUG: PIN1 ", self.Pin1, "\n PIN2", self.Pin2, "\n enPIN", self.enablePin)
-        print("DEBUG: ENABLED")
+        #print("DEBUG: PIN1 ", self.Pin1, "\n PIN2", self.Pin2, "\n enPIN", self.enablePin)
+        #print("DEBUG: ENABLED")
         
     def enable(self):
         '''
         @brief Enable the motor
         '''
         self.enablePin.high()
-        print("DEBUG: ENABLED")
+        #print("DEBUG: ENABLED")
         
     def disable(self):
         '''
@@ -45,7 +45,7 @@ class MotorDriver:
         '''
         self.ch1.pulse_width_percent(0)
         self.ch2.pulse_width_percent(0)
-        print('Setting duty cycle to ' + str(0))
+        #print('DISABLING: Setting duty cycle to ' + str(0))
         
     def set_duty_cycle(self, duty):
         '''
@@ -55,9 +55,9 @@ class MotorDriver:
         if duty >= 0:
             self.ch1.pulse_width_percent(duty)
             self.ch2.pulse_width_percent(0)
-            print('MOTOR: Setting duty cycle to ' + str(duty))
+        #    print('MOTOR: Setting duty cycle to ' + str(duty))
 
         else:
             self.ch1.pulse_width_percent(0)
             self.ch2.pulse_width_percent(-duty)
-            print('MOTOR: Setting duty cycle to NEGATIVE' + str(duty))
+        #    print('MOTOR: Setting duty cycle to NEGATIVE' + str(duty))

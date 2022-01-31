@@ -41,40 +41,50 @@ class closedLoopController:
         self.interval = input_interval  # the interval of the milliseconds
         self.nextTime = utime.ticks_add(self.start_time, self.interval)
         self.uart = UART(2)
+        self.uart.init(115200)
         self.time_list = []
         self.encoder_list = []
 
     def control_algorithm(self):
-        self.update_setpoint()  # prompt the user for an updated setpoint
-        self.update_kp()  # prompt the user for a new kp
+        # self.update_setpoint()  # prompt the user for an updated setpoint
+        # self.update_kp()  # prompt the user for a new kp
+        # print("setting values")
+        #self.kp = .1
+        #self.kp = float(input())
+        input_kp(self)
+        self.final_point = 16384
         self.encoder.set_position(0)  # zero out the encoder value
+        # print("values set")
         while True:
+            # self.kp = float(input())
             self.encoder.update()  # update the encoder value
             error = self.final_point - self.encoder.current_pos  # get the error
+            # print("error = ", error)
             if error == 0:
-                print("DEBUG: ERROR IS NOW 0")
+                # print("DEBUG: ERROR IS NOW 0")
                 self.motor.disable()  # disable the motor
                 break
             else:
                 self.current_time = utime.ticks_ms()
                 if utime.ticks_diff(self.current_time, self.nextTime) >= 0:
-                    actuation = (error * self.kp) / 3.3  # get the actuation
-                    if actuation >= 90:
-                        self.motor.set_duty_cycle(90)
+                    actuation = (error * self.kp)  # get the actuation
+                    if actuation >= 80:
+                        self.motor.set_duty_cycle(80)
                     elif 30 >= actuation > 5:
                         self.motor.set_duty_cycle(30)
                     elif -30 <= actuation < 5:
                         self.motor.set_duty_cycle(-30)
-                    elif actuation <= -90:
-                        self.motor.set_duty_cycle(-90)
+                    elif actuation <= -80:
+                        self.motor.set_duty_cycle(-80)
                     elif -5 <= actuation <= 5:
-                        print("DEBUG: I HAVE FINISHED")
+                        #        print("DEBUG: I HAVE FINISHED")
                         self.motor.disable()
                         break
                     else:
                         self.motor.set_duty_cycle(actuation)
-                self.update_list()  # update the list position
-                self.nextTime = utime.ticks_add(self.nextTime, self.interval)  # update the next time
+                self.update_list()  # update the list position\
+                utime.sleep_ms(self.interval)
+                #self.nextTime = utime.ticks_add(self.nextTime, self.interval)  # update the next time
 
         self.print_list()  # print out the list when we are done
 
@@ -90,7 +100,8 @@ class closedLoopController:
         timestamp = utime.ticks_diff(utime.ticks_ms(), self.start_time)
         self.time_list.append(timestamp)
         self.encoder_list.append(encoder_value)
-        print("DEBUG: ", timestamp, encoder_value)
+
+    # print("DEBUG: ", timestamp, encoder_value)
 
     def update_kp(self):
         self.kp = float(input("Please enter kp"))
@@ -98,11 +109,33 @@ class closedLoopController:
     def print_list(self):
         data = zip(self.time_list, self.encoder_list)
         for numbers in data:
-            print(numbers)
-        #print(self.time_list, self.encoder_list)
+            print(*numbers)
+        print("DONE")
+        # clear the differnt lists
+        self.time_list.clear()
+        self.encoder_list.clear()
+        # print(self.time_list, self.encoder_list)
         #  for index in self.time_list:
-            #  print("time, ", index)
+        #  print("time, ", index)
         #  for index in self.encoder_list:
-            #  print("encoder, ", index)
-       # for index in self.time_list:
-        #    print(self.time_list[index], " , ", self.encoder_list[index])
+        #  print("encoder, ", index)
+    # for index in self.time_list:
+    #    print(self.time_list[index], " , ", self.encoder_list[index])
+
+
+def input_kp(self):
+    while self.uart.any == 0:
+        utime.sleep_us(50)
+    self.kp = self.uart.read()
+    self.kp = self.kp.decode()
+
+#   check = self.uart.any()
+#   while check != 0:
+#       check = self.uart.any()
+#     utime.sleep_us(20)
+
+#  raw_value = self.uart.readline()
+#  modified_value = raw_value  # offset for ascii values
+#   self.kp = modified_value
+
+#

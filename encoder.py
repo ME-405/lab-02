@@ -48,11 +48,11 @@ class Encoder:
         '''
         # Actualizing the encoder position 
         self.update_count = self.timer.counter()
-        print("DEBUG: UPDATE COUNT = ", str(self.update_count))
+        #print("DEBUG: UPDATE COUNT = ", str(self.update_count))
         
         # Obtaining the difference between the encoder positions
         self.delta = self.update_count - self.ref_count
-        print("DEBUG: Delta value = ", str(self.delta))
+        #print("DEBUG: Delta value = ", str(self.delta))
         
         # Correcting for overflow and underflow of the encoder reader value
         if self.delta > 0 and self.delta > self.period/2:
@@ -71,7 +71,7 @@ class Encoder:
             @details    Returns encoder position at time of function call
             @return     current_pos
         '''
-        print('Current position is = ' + str(self.current_pos))
+        #print('Current position is = ' + str(self.current_pos))
         return self.current_pos
 
     def set_position(self, position):
@@ -84,7 +84,7 @@ class Encoder:
         ''' @brief      Allow user to set position in [ticks] of encoder to zero
         '''
         self.current_pos = 0
-        print('Position: '+ str(self.current_pos))
+        #print('Position: '+ str(self.current_pos))
 
     def get_delta(self):
         ''' @brief      Return difference in encoder position in [ticks]
