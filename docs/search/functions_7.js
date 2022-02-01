@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['read_0',['read',['../classencoder_1_1_encoder.html#aa1c1535160682500f5214f45d8197027',1,'encoder::Encoder']]],
-  ['run_1',['run',['../class_computer_interaction_1_1_u_interface.html#a59f40034cbb06ad06584fadb49b3a17f',1,'ComputerInteraction::UInterface']]]
+  ['plot_48',['Plot',['../class_computer_interaction_1_1_u_interface.html#aa424ba50d3b8cde920cc132cf2aec475',1,'ComputerInteraction::UInterface']]],
+  ['print_5flist_49',['print_list',['../classclosed_loop_control_1_1closed_loop_controller.html#a1c26280c15f0bcf5687aa5546dc2b650',1,'closedLoopControl::closedLoopController']]]
 ];

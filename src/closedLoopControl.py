@@ -1,8 +1,8 @@
-"""! 
-	@file     closedLoopControl.py
-    @brief    Close loop control runs and manages data interaction produced by the hardware
-    @author   Nick De Simone, Jacob-Bograd, Horacio Albarran
-    @date     January 30, 2022
+"""!
+@file    closedLoopControl.py
+@details Close loop control runs and manages data interaction produced by the hardware 
+@author  Nick De Simone, Jacob-Bograd, Horacio Albarran
+@date    January 30, 2022
 """
 
 # Importing the required classes and libraries
@@ -13,8 +13,6 @@ from pyb import UART
 import pyb
 import time
 import utime
-
-
 
 class closedLoopController:
     def __init__(self, input_interval, encoder, MotorDriver):
