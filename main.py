@@ -34,26 +34,26 @@ clc = closed_loop(input_interval, EncoderDriver, Motor)
 Motor.enable()
 clc.control_algorithm()
 
-# def main():
-#     utime.sleep_ms(10) #saftey
-#     input_interval = 10
-#     # input_interval = int(input("Enter the interval"))
-#     clc = closed_loop(input_interval, EncoderDriver, Motor)
-#     # print("about to enable the motor")
-#     Motor.enable()
-#     # print("just about to go into while")
-#     while True:
-#         try:
-#             #       print("starting the algorithm")
-#             clc.control_algorithm()
-#         except KeyboardInterrupt:
-#             Motor.disable()
-#             #       print("HIT THE EXCEPTION")
-#             break
+def main():
+    utime.sleep_ms(10) #saftey
+    input_interval = 10
+    # input_interval = int(input("Enter the interval"))
+    clc = closed_loop(input_interval, EncoderDriver, Motor)
+    # print("about to enable the motor")
+    Motor.enable()
+    # print("just about to go into while")
+    while True:
+        try:
+            #       print("starting the algorithm")
+            clc.control_algorithm()
+        except KeyboardInterrupt:
+            Motor.disable()
+            #       print("HIT THE EXCEPTION")
+            break
 
 
-# print('out of loop')
+print('out of loop')
 
 
-#if __name__ == '__main__':
-#    main()
+if __name__ == '__main__':
+   main()

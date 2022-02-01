@@ -7,6 +7,7 @@
 
 ## Importing of libraries
 import pyb
+import Shares
 
 class Encoder:
     '''! 
@@ -15,7 +16,7 @@ class Encoder:
 						methods to work directly with encoder hardware
     '''
 
-    def __init__(self, pin1, pin2, timer, channel1, channel2):
+    def __init__(self, pin1, pin2, timer, channel1, channel2, Shares):
         '''! 
 			@brief   Encoder Driver to manipulate physical encoders
             @details Constructs encoder objects by linking specified
@@ -26,6 +27,9 @@ class Encoder:
             @param   channel1 specify the first chosen channel
             @param   channel2 specify the second chosen channel
         '''
+		
+		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
+        self.shares = Shares
 		
         # Establish Period for Encoder Counting, 2^16 - 1, used to correct for overflow
         self.period = 65535
@@ -59,6 +63,10 @@ class Encoder:
         # Obtaining the difference between the encoder positions
         self.delta = self.update_count - self.ref_count
         #print("DEBUG: Delta value = ", str(self.delta))
+		
+		# Setting the variables with the Shares.py so that it can be access on other files
+        self.shares.En_Update = self.update_count
+        self.shares.Delta = self.delta
         
         # Correcting for overflow and underflow of the encoder reader value
         if self.delta > 0 and self.delta > self.period/2:
