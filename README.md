@@ -11,7 +11,8 @@ Documentation https://me-405.github.io/lab-02/
     the desired positional setpoint. 
     It determines positional error using a quadrature encoder and adjusts the PWM 
     signal accordingly.
-    Once the setpoint is reached, the cumulative time and position data are sent back to the computer, where they are plotted against one another.
+    Once the setpoint is reached, the cumulative time and position data are sent back 
+    to the computer, where they are plotted against one another.
     See the figures below for observation of Position vs. Time for four different values of Kp.
 
 ---
