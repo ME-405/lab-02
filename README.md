@@ -2,6 +2,8 @@
 ## Lab 02
 Jacob Bograd, Nick De Simone, Horacio Albarran
 
+Documentation https://me-405.github.io/lab-02/
+
 ---
 #### This lab is a closed loop controller and step response test system
     The controller works by getting a proportional gain constant (kp) over UART
