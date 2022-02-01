@@ -13,12 +13,11 @@ from pyb import UART
 import pyb
 import time
 import utime
-import Shares
-import serial
+
 
 
 class closedLoopController:
-    def __init__(self, input_interval, encoder, MotorDriver, Shares
+    def __init__(self, input_interval, encoder, MotorDriver
                  # encoder_pin1, encoder_pin2, encoder_timer,
                  # motor_enable, motor_pin1, motor_pin2, motor_timer
                  ):
@@ -33,12 +32,12 @@ class closedLoopController:
         '''
 		
 		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
-        self.shares = Shares 
+        # self.shares = Shares 
 
         # set the setpoint and gain both to 0
         self.final_point = 0
         self.kp = 0
-        self.shares.kp = self.kp
+        #self.shares.kp = self.kp
         self.current_time = 0
         # self.encoder_pin1 = encoder_pin1
         # self.encoder_pin2 = encoder_pin2
@@ -61,8 +60,6 @@ class closedLoopController:
 		# Setting arrays to store data
         self.time_list = []
         self.encoder_list = []
-		# it initialized the serial port as well as defining it 
-        self.ser = serial.Serial(port='COM5', baudrate=115273,timeout=1)
 
     def control_algorithm(self):
 		'''!
@@ -74,9 +71,9 @@ class closedLoopController:
         # self.update_setpoint()  # prompt the user for an updated setpoint
         # self.update_kp()  # prompt the user for a new kp
         # print("setting values")
-        #self.kp = .1
-        #self.kp = float(input())
-		self.input_kp()
+		# self.kp = .1
+		self.kp = float(input())
+		#self.input_kp()
 		self.final_point = 16384
 		self.encoder.set_position(0)  # zero out the encoder value
         # print("values set")
@@ -135,25 +132,20 @@ class closedLoopController:
 					also appending such values to the corresponding array
 		'''
 		
-		# Reading values from the REPl
-		
-		self.myval = self.ser.readline().decode('ascii')
-		self.Data = self.myval.strip().split(',')
-		print(self.Data)
 		
 		# Updating encoder's position on ticks
 		self.encoder.update()
 		#self.Position = float(self.Data[2])
-        #encoder_value = self.encoder.current_pos
+		encoder_value = self.encoder.current_pos
 		
 		# Updating the time-stamp 
 		timestamp = utime.ticks_diff(utime.ticks_ms(), self.start_time)
 		
 		# Appending values to the corresponding array
 		self.time_list.append(timestamp)
-		self.encoder_list.append(self.Position)
+		self.encoder_list.append(encoder_value)
 
-    # print("DEBUG: ", timestamp, encoder_value)
+		# print("DEBUG: ", timestamp, encoder_value)
 
     def update_kp(self):
 		'''!
@@ -167,7 +159,7 @@ class closedLoopController:
         #print(' "P" to plot the data, and "S" to start collecting data from zero')
 		self.K_p = input('Provide with input for K_p:  ')
 		
-		self.ser.write(str(self.K_p).encode('ascii'))
+	
 
     def print_list(self):
 		'''!
@@ -196,7 +188,9 @@ class closedLoopController:
 		while self.uart.any == 0:
 			utime.sleep_us(50)
 		self.kp = self.uart.read()
-		self.kp = self.kp.decode()
+		#self.kp = self.kp.decode()
+		
+		
 	#   check = self.uart.any()
 	#   if check != 0:
 	#       check = self.uart.any()

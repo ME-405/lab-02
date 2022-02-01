@@ -10,17 +10,17 @@ import pyb
 from pyb import Pin
 from pyb import ExtInt
 import time
-import Shares
+
 
 class MotorDriver:
     
-    def __init__(self, en_pin, in1pin, in2pin, inputTimer, channel1, channel2, Shares):
+    def __init__(self, en_pin, in1pin, in2pin, inputTimer, channel1, channel2):
         '''!
         @brief     It will initialize the variables on the main file as well as motor defaults; MotorDriver-Class.
 
         '''
 		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
-        self.shares = Shares
+        # self.shares = Shares
 		
         # Initialize Motor 1 pins to be handled as PWM objects
         self.Pin1 = in1pin
@@ -58,7 +58,7 @@ class MotorDriver:
         @param   Duty ranging from negative to positive one-hundred
         '''
 		
-        self.shares.duty = duty
+        #self.shares.duty = duty
 		
         if duty >= 0:
             self.ch1.pulse_width_percent(duty)
@@ -69,3 +69,8 @@ class MotorDriver:
             self.ch1.pulse_width_percent(0)
             self.ch2.pulse_width_percent(-duty)
         #    print('MOTOR: Setting duty cycle to NEGATIVE' + str(duty))
+
+		
+		
+		
+		
