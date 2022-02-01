@@ -5,20 +5,21 @@ Jacob Bograd, Nick De Simone, Horacio Albarran
 Documentation https://me-405.github.io/lab-02/
 
 ---
-#### This lab is a closed loop controller and step response test system
-    The controller works by getting a proportional gain constant (kp) over UART
-    The controller will then calculate a suitable PWM signal to have the motor 
-    go to the right value. 
-    Then it will update the encoder value and rerun the PWM calculation to get closer to the endpoint
-    Once the endpoint is reached all of the data is sent back to the computer where it is plotted
+#### This lab runs step response tests on a closed loop motor control system
+    The controller receives values for the proportional gain constant, Kp, over UART.
+    The controller then calculates a suitable PWM signal to have the motor 
+    approach the desired positional setpoint. 
+    It determines positional error using a quadrature encoder and adjusts the PWM signal accordingly.
+    Once the setpoint is reached, the aggregate data is sent back to the computer, where position is plotted against time.
+    See the figures below for observation of Position vs. Time for four different values of Kp.
 
 ---
 
 ![Kp = 0.5](Images/K_p%200.5.png)![Kp = 0.6](Images/K_p%200.6.png)
 ![Kp = 0.7](Images/K_p%200.7.png)![kp = 3  ](Images/K_p%203%20we%20had%20to%20hold%20it.png)
     **NOTE**
-    3 was too big of a KP for the flywheel kept going past the setpoint
-    To solve this issue for the test run we held the flywheel to allow it
-    to stop on the stopoint. 
+    Kp = 3 is too large, as the flywheel oscillates, seemingly indefinitely, about the setpoint.
+    We found it necessary to physically grab the flywheel to stop on the setpoint.
+    This represents an inappropriate proportional gain and suggests the gain should be held between 0.1-0.7.
 
 
