@@ -27,11 +27,8 @@ class closedLoopController:
 		@param   encoder set the parameter given for the chosen encoder
 		@param   motor provides with the chosen motor
         '''
-		
-		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
-        # self.shares = Shares 
 
-        # Setting some of the main parameters
+        # Setting some parameters
         self.final_point = 0
         self.kp = 0
         self.current_time = 0
@@ -152,7 +149,8 @@ class closedLoopController:
 		for numbers in data:
 			print(*numbers)
 		print("DONE")
-        # clear the differnt lists
+		
+        # clear the different lists
 		self.time_list.clear()
 		self.encoder_list.clear()
 

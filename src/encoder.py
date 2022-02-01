@@ -5,7 +5,7 @@
     @date     January 30, 2022
 """
 
-## Importing of libraries
+## Importing libraries
 import pyb
 
 
@@ -27,9 +27,6 @@ class Encoder:
             @param   channel1 specify the first chosen channel
             @param   channel2 specify the second chosen channel
         '''
-		
-		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
-        #self.shares = Shares
 		
         # Establish Period for Encoder Counting, 2^16 - 1, used to correct for overflow
         self.period = 65535

@@ -12,7 +12,6 @@ from encoder import Encoder
 from closedLoopControl import closedLoopController as closed_loop
 from pyb import Pin
 import pyb
-import time
 
 # Instantiated object for the encoder as well as timer,
 encoderPin1 = pyb.Pin(pyb.Pin.board.PC6)

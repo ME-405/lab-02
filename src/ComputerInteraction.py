@@ -6,6 +6,7 @@
 @date    January 30, 2022
 """
 
+# Importing libraries and classes
 import serial
 import keyboard
 import numpy as np
@@ -30,7 +31,7 @@ class UInterface:
         @brief It creates an object for the User Interaction
         '''
         
-        # It sets a local variable to use numpy
+        # It sets a local variable to use Numpy
         self.np = np
         
         # It sets a local variable to use the plot command
@@ -48,7 +49,7 @@ class UInterface:
         # It defines a variable for the "Global" variables
         self.keyboard = keyboard
         
-        ## The timestamp for the first iteration
+        ## The time-stamp for the first iteration
         self.start_time = time.time()    
         
         ## The interval of time, in seconds, between runs of the task
@@ -60,7 +61,7 @@ class UInterface:
         # It creates a list with the encoder position
         self.Position_list = []
         
-        # It creates a varible for the values of omega
+        # It creates a variable for the values of omega
         self.Omega_list = []
         
         # It creates an array with the time and position in it 

@@ -9,7 +9,6 @@
 import pyb
 from pyb import Pin
 from pyb import ExtInt
-import time
 
 
 class MotorDriver:
