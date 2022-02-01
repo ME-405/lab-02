@@ -63,10 +63,6 @@ class Encoder:
         # Obtaining the difference between the encoder positions
         self.delta = self.update_count - self.ref_count
         #print("DEBUG: Delta value = ", str(self.delta))
-		
-		# Setting the variables with the Shares.py so that it can be access on other files
-        # self.shares.En_Update = self.update_count
-        # self.shares.Delta = self.delta
         
         # Correcting for overflow and underflow of the encoder reader value
         if self.delta > 0 and self.delta > self.period/2:

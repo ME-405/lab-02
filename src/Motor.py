@@ -19,8 +19,6 @@ class MotorDriver:
         @brief     It will initialize the variables on the main file as well as motor defaults; MotorDriver-Class.
 
         '''
-		# It defines a variable that can be used in this class which uses the variables defined in Shares.py
-        # self.shares = Shares
 		
         # Initialize Motor 1 pins to be handled as PWM objects
         self.Pin1 = in1pin
@@ -57,8 +55,6 @@ class MotorDriver:
         @details Setting duty performance for the motor
         @param   Duty ranging from negative to positive one-hundred
         '''
-		
-        #self.shares.duty = duty
 		
         if duty >= 0:
             self.ch1.pulse_width_percent(duty)

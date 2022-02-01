@@ -1,10 +1,9 @@
 """!
-@file ComputerInteraction2.py
-
+@file    ComputerInteraction2.py
 @details It contains a taksfile that collects data according to the readings from the
-         Enconder connected to the Nucleo-L476RG 
-@author   Nick De Simone, Jacob-Bograd, Horacio Albarran
-@date     January 30, 2022
+			enconder connected to the Nucleo-L476RG 
+@author  Nick De Simone, Jacob-Bograd, Horacio Albarran
+@date    January 30, 2022
 """
 
 import serial
@@ -168,7 +167,7 @@ class UInterface:
                                     print('run # ' + str(self.run))
                                     #print(self.myval)
                                     #print(self.Data_list)
-                                    np.savetxt('lab7Data.csv', self.Data_list2, delimiter=',')         
+                                    np.savetxt('lab2Data.csv', self.Data_list2, delimiter=',')         
                                     self.transitionTo(self.S1_Update_Position)
                                 except:
                                     print('DEBUG: Exception')
